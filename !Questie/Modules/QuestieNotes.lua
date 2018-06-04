@@ -210,8 +210,12 @@ function Questie:RemoveQuestFromMap(questHash, redraw)
     end
 end
 ---------------------------------------------------------------------------------------------------
-function Questie:GetMapInfoFromID(id)
-    return QuestieZoneIDLookup[id];
+function Questie:GetMapInfoFromID(lang,id)
+	if lang == "frFR" then
+		return QuestieZoneIDLookup_frFR[id];
+	else
+		return QuestieZoneIDLookup_enUS[id];
+	end
 end
 ---------------------------------------------------------------------------------------------------
 -- Add quest note to map
@@ -1011,6 +1015,7 @@ function Questie:RecursiveGetPathLocations(path, locations)
 end
 ---------------------------------------------------------------------------------------------------
 function Questie:RecursiveCreateNotes(c, z, v, locationMeta, iconMeta, objectiveid, path, pathKeys)
+	local locale = GetLocale();
     if path == nil then path = {}; end
     if pathKeys == nil then pathKeys = {}; end
     for sourceType, sources in pairs(locationMeta) do
@@ -1028,7 +1033,10 @@ function Questie:RecursiveCreateNotes(c, z, v, locationMeta, iconMeta, objective
                 end
             end
             for i, location in pairs(sources) do
-                local MapInfo = QuestieZoneIDLookup[location[1]];
+				local MapInfo = QuestieZoneIDLookup_enUS[location[1]];
+				if locale == "frFR" then
+					MapInfo = QuestieZoneIDLookup_frFR[location[1]];
+				end
                 if MapInfo ~= nil then
                     c = MapInfo[4];
                     z = MapInfo[5];

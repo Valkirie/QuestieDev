@@ -1183,7 +1183,8 @@ function GetCurrentMapID()
     if file == nil then
         return -1;
     end
-    local zid = QuestieZones[file];
+	local lang = GetLocale();
+    local zid = QuestieZones[lang][file];
     if zid == nil then
         return -1;
     else

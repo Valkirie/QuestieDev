@@ -55601,15 +55601,20 @@ function GetEntityLocations(entity)
             local added = false
             local class = UnitClass("Player")
             local race = UnitRace("Player")
+			local locale = GetLocale();
+
             for i, location in pairs(sources) do
                 if (not entity['locations_rr']) or (not entity['locations_rr'][i]) or checkRequirements(class, race, nil, entity['locations_rr'][i]) then
                     local reformattedLocation
                     if location[2] >= 1 then
                         -- new location format
                         reformattedLocation = location
-                    elseif QuestieZoneIDLookup[location[1]] then
+                    elseif QuestieZoneIDLookup_enUS[location[1]] then
                         -- old location format
-                        local MapInfo = QuestieZoneIDLookup[location[1]]
+                        local MapInfo = QuestieZoneIDLookup_enUS[location[1]]
+						if locale == "frFR" then
+							MapInfo = QuestieZoneIDLookup_frFR[location[1]]
+						end
                         reformattedLocation = {MapInfo[4], MapInfo[5], location[2], location[3]}
                     end
 

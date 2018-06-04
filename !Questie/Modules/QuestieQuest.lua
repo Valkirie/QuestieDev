@@ -1148,7 +1148,19 @@ RaceBitIndexTable = {
     ['tauren'] = 6,
     ['gnome'] = 7,
     ['troll'] = 8,
-    ['goblin'] = 9
+    ['goblin'] = 9,
+	
+	['humain'] = 1,
+    ['orc'] = 2,
+    ['nain'] = 3,
+    ['elfedelanuit'] = 4,
+    ['elfe de la nuit'] = 4,
+    ['scourge'] = 5,
+    ['mort-vivant'] = 5,
+    ['tauren'] = 6,
+    ['gnome'] = 7,
+    ['troll'] = 8,
+    ['gobelin'] = 9
 };
 ClassBitIndexTable = {
     ['warrior'] = 1,
@@ -1159,7 +1171,17 @@ ClassBitIndexTable = {
     ['shaman'] = 7,
     ['mage'] = 8,
     ['warlock'] = 9,
-    ['druid'] = 11
+    ['druid'] = 11,
+	
+	['guerrier'] = 1,
+    ['paladin'] = 2,
+    ['chasseur'] = 3,
+    ['voleur'] = 4,
+    ['prêtre'] = 5,
+    ['chaman'] = 7,
+    ['mage'] = 8,
+    ['démoniste'] = 9,
+    ['druide'] = 11
 };
 ---------------------------------------------------------------------------------------------------
 function unpackBinary(val)
@@ -1189,9 +1211,10 @@ end
 ---------------------------------------------------------------------------------------------------
 function Questie:GetAvailableQuestHashes(mapFileName, levelFrom, levelTo)
     local mapid =  -1;
-    if(QuestieZones[mapFileName]) then
-        c = QuestieZones[mapFileName][4];
-        z = QuestieZones[mapFileName][5];
+	local lang = GetLocale();
+    if(QuestieZones[lang][mapFileName]) then
+        c = QuestieZones[lang][mapFileName][4];
+        z = QuestieZones[lang][mapFileName][5];
     end
     local class = UnitClass("Player");
     local race = UnitRace("Player");
